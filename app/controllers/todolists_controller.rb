@@ -5,10 +5,13 @@ class TodolistsController < ApplicationController
 
   def create 
     #データを新規登録するためのインスタンス作成
-    list = List.new(list_params)
-    list.save
+    @list = List.new(list_params)
+    if @list.save
     # トップがメンヘりトップ画面へトップしダイレクト
-    redirect_to todolist_path(list.id)
+    redirect_to todolist_path(@list.id)
+    else
+    render :new
+    end 
   end 
   
   def index
